@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.getElementById("start-screen").classList.remove("hidden");
+
+  document.getElementById("chapter-screen").classList.add("hidden");
+  document.getElementById("quiz-box").classList.add("hidden");
+  document.getElementById("result-box").classList.add("hidden");
+
+});
+
 let current = 0;
 let selected = null;
 
@@ -255,8 +265,8 @@ function startQuiz() {
   selected = null;
 
   document.getElementById("start-screen").classList.add("hidden");
-  document.getElementById("result-box").classList.add("hidden");
   document.getElementById("chapter-screen").classList.add("hidden");
+  document.getElementById("result-box").classList.add("hidden");
 
   document.getElementById("quiz-box").classList.remove("hidden");
 
