@@ -264,10 +264,11 @@ function startQuiz() {
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("chapter-screen").classList.add("hidden");
   document.getElementById("result-box").classList.add("hidden");
-  showChapter(); //
+  
+    // 👉 SHOW ACT 1 FIRST
+  showChapter(0);
+  
   document.getElementById("quiz-box").classList.remove("hidden");
-
-  loadQuestion();
 }
 
 // ====================== SHUFFLE ======================
@@ -368,9 +369,7 @@ function showChapterIfNeeded() {
   return true;
 }
 
-function showChapter() {
-
-  const chapterIndex = (current / 5);
+function showChapter(chapterIndex) {
 
   const chapter = document.getElementById("chapter-screen");
 
@@ -387,6 +386,7 @@ function showChapter() {
     chapter.onclick = null;
     chapter.classList.add("hidden");
     document.getElementById("quiz-box").classList.remove("hidden");
+
     loadQuestion();
   };
 }
@@ -404,17 +404,17 @@ function nextQuestion() {
 
   current++;
 
-  if (current >= questions.length) {
-    showResult();
-    return;
-  }
+if (current >= questions.length) {
+  showResult();
+  return;
+}
 
-  // 👉 SHOW CHAPTER BEFORE NEXT BLOCK STARTS
-  if (current % 5 === 0) {
-    showChapter();
-  } else {
-    loadQuestion();
-  }
+// show chapter AFTER each block (5, 10, 15...)
+if (current % 5 === 0) {
+  showChapter(current / 5);
+} else {
+  loadQuestion();
+}
 }
 
 // ====================== RESULT ======================
