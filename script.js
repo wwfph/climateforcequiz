@@ -40,8 +40,221 @@ const chapters = [
 ];
 
 // ====================== QUESTIONS ======================
-// (keep your full questions array exactly as you already have it)
-// IMPORTANT: not repeated here to keep message readable
+const questions = [
+
+  // ===================== ACT 1: WARNING SIGNS =====================
+
+  {
+    q: "Unusually hot summers now last longer in your city. What is your first concern?",
+    a: [
+      { text: "Heat stress on hospitals and people.", type: "Tank" },
+      { text: "Government preparedness.", type: "Warrior" },
+      { text: "Temperature data trends.", type: "Archer" },
+      { text: "Cooling system strain.", type: "Mage" },
+      { text: "Elderly and vulnerable groups.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Rain patterns suddenly become unpredictable. You notice:",
+    a: [
+      { text: "Emergency readiness gaps.", type: "Tank" },
+      { text: "Need for immediate action.", type: "Warrior" },
+      { text: "Shifting rainfall data.", type: "Archer" },
+      { text: "Urban drainage redesign ideas.", type: "Mage" },
+      { text: "Farmers struggling.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Sea levels are slowly rising. Your biggest concern is:",
+    a: [
+      { text: "Coastal protection systems.", type: "Tank" },
+      { text: "Policy urgency.", type: "Warrior" },
+      { text: "Measurement accuracy.", type: "Archer" },
+      { text: "Floating city concepts.", type: "Mage" },
+      { text: "Fishing communities losing livelihood.", type: "Healer" }
+    ]
+  },
+  {
+    q: "A mild typhoon causes unexpected flooding. You think:",
+    a: [
+      { text: "Disaster readiness systems.", type: "Tank" },
+      { text: "Stronger government response.", type: "Warrior" },
+      { text: "Storm pattern analysis.", type: "Archer" },
+      { text: "Better infrastructure design.", type: "Mage" },
+      { text: "Helping affected families.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Urban heat becomes a daily struggle. You respond by:",
+    a: [
+      { text: "Cooling shelters and safety zones.", type: "Tank" },
+      { text: "Public awareness campaigns.", type: "Warrior" },
+      { text: "Heat mapping data analysis.", type: "Archer" },
+      { text: "Smart cooling innovations.", type: "Mage" },
+      { text: "Supporting street workers.", type: "Healer" }
+    ]
+  },
+
+  // ===================== ACT 2: INTENSIFYING STORMS =====================
+
+  {
+    q: "A super typhoon is approaching your region. Your instinct is:",
+    a: [
+      { text: "Prepare evacuation centers.", type: "Tank" },
+      { text: "Mobilize emergency response.", type: "Warrior" },
+      { text: "Track storm data closely.", type: "Archer" },
+      { text: "Design flood barriers.", type: "Mage" },
+      { text: "Check on neighbors.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Flooding becomes more frequent in cities. You notice:",
+    a: [
+      { text: "Weak infrastructure systems.", type: "Tank" },
+      { text: "Need for stronger leadership.", type: "Warrior" },
+      { text: "Rainfall pattern shifts.", type: "Archer" },
+      { text: "Urban redesign opportunities.", type: "Mage" },
+      { text: "More displaced families.", type: "Healer" }
+    ]
+  },
+  {
+    q: "A blackout happens during extreme weather. You:",
+    a: [
+      { text: "Ensure safety first.", type: "Tank" },
+      { text: "Coordinate response teams.", type: "Warrior" },
+      { text: "Analyze grid failure.", type: "Archer" },
+      { text: "Think of renewable energy solutions.", type: "Mage" },
+      { text: "Help affected households.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Evacuation centers are overcrowded. You focus on:",
+    a: [
+      { text: "Order and safety systems.", type: "Tank" },
+      { text: "Fast coordination of resources.", type: "Warrior" },
+      { text: "Capacity and logistics data.", type: "Archer" },
+      { text: "Better shelter design.", type: "Mage" },
+      { text: "Human comfort and dignity.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Misinformation spreads during disasters. You:",
+    a: [
+      { text: "Maintain calm systems.", type: "Tank" },
+      { text: "Correct false information.", type: "Warrior" },
+      { text: "Verify facts and sources.", type: "Archer" },
+      { text: "Improve communication tools.", type: "Mage" },
+      { text: "Support confused communities.", type: "Healer" }
+    ]
+  },
+
+  // ===================== ACT 3: STRUGGLE & ADAPTATION =====================
+
+  {
+    q: "Communities begin rebuilding after disasters. You contribute:",
+    a: [
+      { text: "Rebuilding infrastructure.", type: "Tank" },
+      { text: "Organizing recovery efforts.", type: "Warrior" },
+      { text: "Assessing damage data.", type: "Archer" },
+      { text: "Designing resilient cities.", type: "Mage" },
+      { text: "Supporting affected families.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Food supply becomes unstable. You focus on:",
+    a: [
+      { text: "Secure distribution systems.", type: "Tank" },
+      { text: "Urgent policy action.", type: "Warrior" },
+      { text: "Supply chain data tracking.", type: "Archer" },
+      { text: "Urban farming solutions.", type: "Mage" },
+      { text: "Helping hungry communities.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Climate migration increases. You prioritize:",
+    a: [
+      { text: "Stable housing systems.", type: "Tank" },
+      { text: "National response planning.", type: "Warrior" },
+      { text: "Migration pattern analysis.", type: "Archer" },
+      { text: "New city development plans.", type: "Mage" },
+      { text: "Human dignity and care.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Schools are disrupted by climate events. You:",
+    a: [
+      { text: "Ensure continuity systems.", type: "Tank" },
+      { text: "Push education recovery.", type: "Warrior" },
+      { text: "Track disruption patterns.", type: "Archer" },
+      { text: "Develop remote learning tools.", type: "Mage" },
+      { text: "Support students emotionally.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Mental health impacts rise after disasters. You:",
+    a: [
+      { text: "Create safe community spaces.", type: "Tank" },
+      { text: "Organize support programs.", type: "Warrior" },
+      { text: "Study mental health data.", type: "Archer" },
+      { text: "Innovate mental health tools.", type: "Mage" },
+      { text: "Provide emotional care.", type: "Healer" }
+    ]
+  },
+
+  // ===================== ACT 4: NEW FUTURE =====================
+
+  {
+    q: "The country invests heavily in climate solutions. You:",
+    a: [
+      { text: "Build resilient systems.", type: "Tank" },
+      { text: "Lead implementation.", type: "Warrior" },
+      { text: "Analyze effectiveness.", type: "Archer" },
+      { text: "Design innovations.", type: "Mage" },
+      { text: "Ensure inclusivity.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Renewable energy becomes widespread. You:",
+    a: [
+      { text: "Support infrastructure.", type: "Tank" },
+      { text: "Push adoption.", type: "Warrior" },
+      { text: "Monitor energy data.", type: "Archer" },
+      { text: "Invent new systems.", type: "Mage" },
+      { text: "Help communities adapt.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Cities are redesigned for floods and heat. You:",
+    a: [
+      { text: "Ensure stability.", type: "Tank" },
+      { text: "Oversee transformation.", type: "Warrior" },
+      { text: "Evaluate models.", type: "Archer" },
+      { text: "Reimagine urban design.", type: "Mage" },
+      { text: "Protect people.", type: "Healer" }
+    ]
+  },
+  {
+    q: "Climate education becomes mandatory. You:",
+    a: [
+      { text: "Support implementation.", type: "Tank" },
+      { text: "Advocate strongly.", type: "Warrior" },
+      { text: "Improve curriculum data.", type: "Archer" },
+      { text: "Create learning tools.", type: "Mage" },
+      { text: "Teach empathy and care.", type: "Healer" }
+    ]
+  },
+  {
+    q: "You look at the future Philippines. You feel:",
+    a: [
+      { text: "Prepared and steady.", type: "Tank" },
+      { text: "Ready to lead change.", type: "Warrior" },
+      { text: "Analytical and aware.", type: "Archer" },
+      { text: "Inspired and creative.", type: "Mage" },
+      { text: "Hopeful for people.", type: "Healer" }
+    ]
+  }
+
+];
 
 // ====================== START ======================
 function startQuiz() {
