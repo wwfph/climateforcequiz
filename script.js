@@ -247,6 +247,13 @@ const questions = [
   }
 
 ];
+/* ---------------- START ---------------- */
+
+function startQuiz() {
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("quiz-box").classList.remove("hidden");
+  loadQuestion();
+}
 
 /* ---------------- SHUFFLE ---------------- */
 
@@ -417,8 +424,6 @@ function restartQuiz() {
 
   document.getElementById("result-box").classList.add("hidden");
   document.getElementById("quiz-box").classList.remove("hidden");
-
-  loadQuestion();
 }
 
 /* ---------------- START ---------------- */
