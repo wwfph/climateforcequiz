@@ -74,14 +74,29 @@ function updateProgress() {
 // ====================== LOAD QUESTION ======================
 function loadQuestion() {
 
-  document.getElementById("chapter-screen").classList.add("hidden");
-  document.getElementById("chapter-screen").onclick = null;
+  if (!questions || questions.length === 0) {
+    console.error("Questions array missing!");
+    return;
+  }
 
   const q = questions[current];
 
-  document.getElementById("question").innerText = q.q;
+  if (!q) {
+    console.error("Question index invalid:", current);
+    return;
+  }
 
+  document.getElementById("chapter-screen").classList.add("hidden");
+
+  const questionEl = document.getElementById("question");
   const answersDiv = document.getElementById("answers");
+
+  if (!questionEl || !answersDiv) {
+    console.error("Missing HTML elements");
+    return;
+  }
+
+  questionEl.innerText = q.q;
   answersDiv.innerHTML = "";
 
   selected = null;
@@ -93,7 +108,6 @@ function loadQuestion() {
     btn.innerText = ans.text;
 
     btn.onclick = () => {
-
       selected = ans.type;
 
       document.querySelectorAll("#answers button").forEach(b => {
