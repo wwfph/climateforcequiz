@@ -276,6 +276,8 @@ function updateProgress() {
 
 function loadQuestion() {
 
+  document.getElementById("chapter-screen").onclick = null;
+
   const q = questions[current];
 
   document.getElementById("question").innerText = q.q;
@@ -315,22 +317,23 @@ function showChapterIfNeeded() {
 
   const chapterIndex = Math.floor(current / 5);
 
-  if (current > 0 && current % 5 === 0 && current < questions.length) {
+  if (current === 5 || current === 10 || current === 15) {
 
-    // show chapter
     document.getElementById("quiz-box").classList.add("hidden");
     document.getElementById("chapter-screen").classList.remove("hidden");
 
     document.getElementById("chapter-title").innerText =
-      chapters[chapterIndex].title;
+      chapters[chapterIndex - 1].title;
 
     document.getElementById("chapter-desc").innerText =
-      chapters[chapterIndex].desc;
+      chapters[chapterIndex - 1].desc;
 
-    // ❌ NO setTimeout
-    // ✅ instead wait for click
+    // IMPORTANT: remove old handlers first
+    const chapter = document.getElementById("chapter-screen");
+    chapter.onclick = null;
 
-    document.getElementById("chapter-screen").onclick = () => {
+    chapter.onclick = () => {
+      chapter.onclick = null;
 
       document.getElementById("chapter-screen").classList.add("hidden");
       document.getElementById("quiz-box").classList.remove("hidden");
@@ -363,8 +366,10 @@ function nextQuestion() {
     return;
   }
 
-  // IMPORTANT: DO NOT loadQuestion immediately if chapter shows
-  if (!showChapterIfNeeded()) {
+  // IMPORTANT: always let chapter handler control flow
+  const chapterShown = showChapterIfNeeded();
+
+  if (!chapterShown) {
     loadQuestion();
   }
 }
