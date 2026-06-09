@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Climate Champion Quiz</title>
-  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="stylesheet" href="style.css?v=999">
 </head>
+
 <body>
 
 <div class="container">
@@ -22,6 +24,7 @@
     <div id="progress-container">
       <div id="progress-bar"></div>
     </div>
+
     <p id="progress-text"></p>
 
     <h1 id="question"></h1>
@@ -29,19 +32,20 @@
     <div id="answers"></div>
 
     <button id="next-btn" onclick="nextQuestion()">Next</button>
+
   </div>
 
   <!-- Result -->
   <div id="result-box" class="hidden">
     <h1 id="result-title"></h1>
     <p id="result-desc"></p>
-   <button onclick="console.log('clicked'); nextQuestion()">Next</button>
+
+    <button onclick="restartQuiz()">Restart</button>
   </div>
-<link rel="stylesheet" href="style.css?v=999">
-<script src="script.js?v=999"></script>
+
 </div>
 
+<script src="script.js?v=999"></script>
 
 </body>
 </html>
-<script src="script.js"></script>
