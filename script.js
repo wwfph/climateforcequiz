@@ -315,7 +315,7 @@ function showChapterIfNeeded() {
 
   const chapterIndex = Math.floor(current / 5);
 
-  if (current > 0 && current % 5 === 0 && current < questions.length) {
+  if (current % 5 === 0 && current !== 0 && current < questions.length)
 
     document.getElementById("quiz-box").classList.add("hidden");
     document.getElementById("chapter-screen").classList.remove("hidden");
@@ -430,5 +430,3 @@ function restartQuiz() {
 }
 
 /* ---------------- START ---------------- */
-
-loadQuestion();
