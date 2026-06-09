@@ -326,13 +326,16 @@ function showChapterIfNeeded() {
     document.getElementById("chapter-desc").innerText =
       chapters[chapterIndex].desc;
 
-      document.getElementById("chapter-screen").onclick = () => {
+    setTimeout(() => {
 
-  document.getElementById("chapter-screen").classList.add("hidden");
-  document.getElementById("quiz-box").classList.remove("hidden");
+      document.getElementById("chapter-screen").classList.add("hidden");
+      document.getElementById("quiz-box").classList.remove("hidden");
 
-  loadQuestion();
-};
+      // IMPORTANT FIX:
+      loadQuestion();
+
+    }, 1800);
+
     return true;
   }
 
@@ -358,7 +361,7 @@ function nextQuestion() {
     return;
   }
 
-  // only show chapter OR load question (never both conflict)
+  // IMPORTANT: DO NOT loadQuestion immediately if chapter shows
   if (!showChapterIfNeeded()) {
     loadQuestion();
   }
