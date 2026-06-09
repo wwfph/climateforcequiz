@@ -262,15 +262,13 @@ function startQuiz() {
   selected = null;
 
   document.getElementById("start-screen").classList.add("hidden");
-  document.getElementById("chapter-screen").classList.add("hidden");
   document.getElementById("result-box").classList.add("hidden");
-  
-    // 👉 SHOW ACT 1 FIRST
+
+  // ❗ show ACT 1 first
   showChapter(0);
-  
+
   document.getElementById("quiz-box").classList.remove("hidden");
 }
-
 // ====================== SHUFFLE ======================
 function shuffle(array) {
   return [...array].sort(() => Math.random() - 0.5);
@@ -369,7 +367,7 @@ function showChapterIfNeeded() {
   return true;
 }
 
-function showChapter(chapterIndex) {
+function showChapter(index) {
 
   const chapter = document.getElementById("chapter-screen");
 
@@ -377,17 +375,17 @@ function showChapter(chapterIndex) {
   chapter.classList.remove("hidden");
 
   document.getElementById("chapter-title").innerText =
-    chapters[chapterIndex].title;
+    chapters[index].title;
 
   document.getElementById("chapter-desc").innerText =
-    chapters[chapterIndex].desc;
+    chapters[index].desc;
 
   chapter.onclick = () => {
     chapter.onclick = null;
     chapter.classList.add("hidden");
     document.getElementById("quiz-box").classList.remove("hidden");
 
-    loadQuestion();
+    loadQuestion(); // first question starts AFTER Act 1
   };
 }
 
@@ -404,17 +402,17 @@ function nextQuestion() {
 
   current++;
 
-if (current >= questions.length) {
-  showResult();
-  return;
-}
+  if (current >= questions.length) {
+    showResult();
+    return;
+  }
 
-// show chapter AFTER each block (5, 10, 15...)
-if (current % 5 === 0) {
-  showChapter(current / 5);
-} else {
-  loadQuestion();
-}
+  // show ACT after Q5, Q10, Q15...
+  if (current % 5 === 0) {
+    showChapter(current / 5);
+  } else {
+    loadQuestion();
+  }
 }
 
 // ====================== RESULT ======================
