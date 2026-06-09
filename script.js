@@ -319,15 +319,13 @@ function showChapterIfNeeded() {
     document.getElementById("chapter-desc").innerText =
       chapters[chapterIndex].desc;
 
-    setTimeout(() => {
+      document.getElementById("chapter-screen").onclick = () => {
 
-      document.getElementById("chapter-screen").classList.add("hidden");
-      document.getElementById("quiz-box").classList.remove("hidden");
+  document.getElementById("chapter-screen").classList.add("hidden");
+  document.getElementById("quiz-box").classList.remove("hidden");
 
-      loadQuestion();
-
-    }, 1200);
-
+  loadQuestion();
+};
     return true;
   }
 
