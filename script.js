@@ -9,8 +9,6 @@ let scores = {
   Healer: 0
 };
 
-/* ---------------- CHAPTERS ---------------- */
-
 const chapters = [
   {
     title: "ACT 1: Warning Signs",
@@ -29,8 +27,6 @@ const chapters = [
     desc: "A climate-resilient future is being shaped."
   }
 ];
-
-/* ---------------- QUESTIONS ---------------- */
 
 const questions = [
   {
@@ -82,16 +78,16 @@ const questions = [
       { text: "Find innovations.", type: "Mage" },
       { text: "Check on others.", type: "Healer" }
     ]
-  },
-
-  // (same pattern continues for full 20 — shortened here for clarity)
+  }
 ];
 
-/* ---------------- HELPERS ---------------- */
+/* ---------------- SHUFFLE ---------------- */
 
 function shuffle(array) {
   return [...array].sort(() => Math.random() - 0.5);
 }
+
+/* ---------------- PROGRESS ---------------- */
 
 function updateProgress() {
   const percent = (current / questions.length) * 100;
@@ -102,13 +98,13 @@ function updateProgress() {
     `Question ${current + 1} of ${questions.length}`;
 }
 
-/* ---------------- CHAPTER LOGIC ---------------- */
+/* ---------------- CHAPTERS ---------------- */
 
 function showChapterIfNeeded() {
   if (current % 5 === 0 && current < questions.length) {
 
-    document.getElementById("quiz-box").classList.add("hidden");
-    document.getElementById("chapter-screen").classList.remove("hidden");
+    document.getElementById("quiz-box").style.display = "none";
+    document.getElementById("chapter-screen").style.display = "block";
 
     const chapterIndex = Math.floor(current / 5);
 
@@ -119,16 +115,17 @@ function showChapterIfNeeded() {
       chapters[chapterIndex].desc;
 
     setTimeout(() => {
-      document.getElementById("chapter-screen").classList.add("hidden");
-      document.getElementById("quiz-box").classList.remove("hidden");
+      document.getElementById("chapter-screen").style.display = "none";
+      document.getElementById("quiz-box").style.display = "block";
       loadQuestion();
-    }, 2000);
+    }, 1500);
   }
 }
 
-/* ---------------- QUIZ ---------------- */
+/* ---------------- LOAD QUESTION ---------------- */
 
 function loadQuestion() {
+
   const q = questions[current];
 
   document.getElementById("question").innerText = q.q;
@@ -136,17 +133,25 @@ function loadQuestion() {
   const answersDiv = document.getElementById("answers");
   answersDiv.innerHTML = "";
 
-  shuffle(q.a).forEach(ans => {
-    const btn = document.createElement("button");
+  selected = null;
 
+  const shuffled = shuffle(q.a);
+
+  shuffled.forEach(ans => {
+
+    const btn = document.createElement("button");
     btn.innerText = ans.text;
 
     btn.onclick = () => {
+
       selected = ans.type;
 
-      document.querySelectorAll("#answers button")
-        .forEach(b => b.style.background = "#1e293b");
+      // clear all highlights
+      document.querySelectorAll("#answers button").forEach(b => {
+        b.style.background = "#1e293b";
+      });
 
+      // highlight selected
       btn.style.background = "#475569";
     };
 
@@ -156,13 +161,19 @@ function loadQuestion() {
   updateProgress();
 }
 
-/* ---------------- NAVIGATION ---------------- */
+/* ---------------- NEXT ---------------- */
 
 function nextQuestion() {
-  if (!selected) return;
+
+  console.log("Next clicked. Selected:", selected);
+
+  if (!selected) {
+    alert("Please select an answer first!");
+    return;
+  }
 
   scores[selected]++;
-  selected = null;
+
   current++;
 
   if (current >= questions.length) {
@@ -177,8 +188,8 @@ function nextQuestion() {
 
 function showResult() {
 
-  document.getElementById("quiz-box").classList.add("hidden");
-  document.getElementById("result-box").classList.remove("hidden");
+  document.getElementById("quiz-box").style.display = "none";
+  document.getElementById("result-box").style.display = "block";
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
 
@@ -230,8 +241,8 @@ function restartQuiz() {
     Healer: 0
   };
 
-  document.getElementById("result-box").classList.add("hidden");
-  document.getElementById("quiz-box").classList.remove("hidden");
+  document.getElementById("result-box").style.display = "none";
+  document.getElementById("quiz-box").style.display = "block";
 
   loadQuestion();
 }
