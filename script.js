@@ -101,10 +101,11 @@ function updateProgress() {
 /* ---------------- CHAPTERS ---------------- */
 
 function showChapterIfNeeded() {
+
   if (current % 5 === 0 && current < questions.length) {
 
-    document.getElementById("quiz-box").style.display = "none";
-    document.getElementById("chapter-screen").style.display = "block";
+    document.getElementById("quiz-box").classList.add("hidden");
+    document.getElementById("chapter-screen").classList.remove("hidden");
 
     const chapterIndex = Math.floor(current / 5);
 
@@ -115,10 +116,13 @@ function showChapterIfNeeded() {
       chapters[chapterIndex].desc;
 
     setTimeout(() => {
-      document.getElementById("chapter-screen").style.display = "none";
-      document.getElementById("quiz-box").style.display = "block";
+
+      document.getElementById("chapter-screen").classList.add("hidden");
+      document.getElementById("quiz-box").classList.remove("hidden");
+
       loadQuestion();
-    }, 1500);
+
+    }, 1200);
   }
 }
 
@@ -188,8 +192,8 @@ function nextQuestion() {
 
 function showResult() {
 
-  document.getElementById("quiz-box").style.display = "none";
-  document.getElementById("result-box").style.display = "block";
+document.getElementById("quiz-box").classList.add("hidden");
+document.getElementById("result-box").classList.remove("hidden");
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
 
@@ -241,8 +245,8 @@ function restartQuiz() {
     Healer: 0
   };
 
-  document.getElementById("result-box").style.display = "none";
-  document.getElementById("quiz-box").style.display = "block";
+document.getElementById("result-box").classList.add("hidden");
+document.getElementById("quiz-box").classList.remove("hidden");
 
   loadQuestion();
 }
