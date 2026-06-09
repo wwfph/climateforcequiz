@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Climate Champion Quiz</title>
 
-  <link rel="stylesheet" href="style.css?v=999">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -13,21 +13,21 @@
 <div class="container">
 
   <!-- Start Screen -->
-  <div id="start-screen">
-  <h1>🌍 Climate Champion</h1>
-  <p>Which role will you become in a changing Philippines?</p>
-  <button onclick="startQuiz()">Start</button>
-</div>
+  <div id="start-screen" class="screen">
+    <h1>🌍 Climate Champion</h1>
+    <p>Which role will you become in a changing Philippines?</p>
+    <button onclick="startQuiz()">Start</button>
+  </div>
 
-  <!-- Chapter Screen -->
-  <div id="chapter-screen" class="hidden">
-  <h2 id="chapter-title"></h2>
-  <p id="chapter-desc"></p>
-  <p style="opacity:0.7;">Tap anywhere to continue</p>
-</div>
+  <!-- Chapter Screen (ACT 1) -->
+  <div id="chapter-screen" class="screen hidden">
+    <h2 id="chapter-title">Act 1</h2>
+    <p id="chapter-desc">Loading story...</p>
+    <p style="opacity:0.7;">Tap anywhere to continue</p>
+  </div>
 
   <!-- Quiz Box -->
-  <div id="quiz-box" class="hidden">
+  <div id="quiz-box" class="screen hidden">
 
     <div id="progress-container">
       <div id="progress-bar"></div>
@@ -44,7 +44,7 @@
   </div>
 
   <!-- Result -->
-  <div id="result-box" class="hidden">
+  <div id="result-box" class="screen hidden">
     <h1 id="result-title"></h1>
     <p id="result-desc"></p>
 
@@ -53,7 +53,7 @@
 
 </div>
 
-<script src="script.js?v=999"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
