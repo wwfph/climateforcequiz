@@ -19,6 +19,21 @@ body {
   display: none;
 }
 
+#start-screen {
+  text-align: center;
+  padding: 40px;
+}
+
+/* Start Screen */
+#start-screen button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+}
+
 /* Progress bar */
 #progress-container {
   width: 100%;
