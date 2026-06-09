@@ -10,14 +10,28 @@
 
 <div class="container">
 
+  <!-- Chapter Screen -->
+  <div id="chapter-screen" class="hidden">
+    <h2 id="chapter-title"></h2>
+    <p id="chapter-desc"></p>
+  </div>
+
+  <!-- Quiz Box -->
   <div id="quiz-box">
-    <h1 id="question">Loading...</h1>
+
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+    <p id="progress-text"></p>
+
+    <h1 id="question"></h1>
 
     <div id="answers"></div>
 
     <button id="next-btn" onclick="nextQuestion()">Next</button>
   </div>
 
+  <!-- Result -->
   <div id="result-box" class="hidden">
     <h1 id="result-title"></h1>
     <p id="result-desc"></p>
