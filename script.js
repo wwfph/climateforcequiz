@@ -9,6 +9,8 @@ let scores = {
   Healer: 0
 };
 
+/* ---------------- CHAPTERS ---------------- */
+
 const chapters = [
   {
     title: "ACT 1: Warning Signs",
@@ -27,6 +29,8 @@ const chapters = [
     desc: "A climate-resilient future is being shaped."
   }
 ];
+
+/* ---------------- QUESTIONS ---------------- */
 
 const questions = [
   {
@@ -98,34 +102,6 @@ function updateProgress() {
     `Question ${current + 1} of ${questions.length}`;
 }
 
-/* ---------------- CHAPTERS ---------------- */
-
-function showChapterIfNeeded() {
-
-  if (current % 5 === 0 && current < questions.length) {
-
-    document.getElementById("quiz-box").classList.add("hidden");
-    document.getElementById("chapter-screen").classList.remove("hidden");
-
-    const chapterIndex = Math.floor(current / 5);
-
-    document.getElementById("chapter-title").innerText =
-      chapters[chapterIndex].title;
-
-    document.getElementById("chapter-desc").innerText =
-      chapters[chapterIndex].desc;
-
-    setTimeout(() => {
-
-      document.getElementById("chapter-screen").classList.add("hidden");
-      document.getElementById("quiz-box").classList.remove("hidden");
-
-      loadQuestion();
-
-    }, 1200);
-  }
-}
-
 /* ---------------- LOAD QUESTION ---------------- */
 
 function loadQuestion() {
@@ -150,12 +126,10 @@ function loadQuestion() {
 
       selected = ans.type;
 
-      // clear all highlights
       document.querySelectorAll("#answers button").forEach(b => {
         b.style.background = "#1e293b";
       });
 
-      // highlight selected
       btn.style.background = "#475569";
     };
 
@@ -165,11 +139,41 @@ function loadQuestion() {
   updateProgress();
 }
 
+/* ---------------- CHAPTERS ---------------- */
+
+function showChapterIfNeeded() {
+
+  const chapterIndex = Math.floor(current / 5);
+
+  if (current > 0 && current % 5 === 0 && current < questions.length) {
+
+    document.getElementById("quiz-box").classList.add("hidden");
+    document.getElementById("chapter-screen").classList.remove("hidden");
+
+    document.getElementById("chapter-title").innerText =
+      chapters[chapterIndex].title;
+
+    document.getElementById("chapter-desc").innerText =
+      chapters[chapterIndex].desc;
+
+    setTimeout(() => {
+
+      document.getElementById("chapter-screen").classList.add("hidden");
+      document.getElementById("quiz-box").classList.remove("hidden");
+
+      loadQuestion();
+
+    }, 1200);
+
+    return true;
+  }
+
+  return false;
+}
+
 /* ---------------- NEXT ---------------- */
 
 function nextQuestion() {
-
-  console.log("Next clicked. Selected:", selected);
 
   if (!selected) {
     alert("Please select an answer first!");
@@ -177,6 +181,7 @@ function nextQuestion() {
   }
 
   scores[selected]++;
+  selected = null;
 
   current++;
 
@@ -185,15 +190,18 @@ function nextQuestion() {
     return;
   }
 
-  showChapterIfNeeded();
+  // only show chapter OR load question (never both conflict)
+  if (!showChapterIfNeeded()) {
+    loadQuestion();
+  }
 }
 
 /* ---------------- RESULT ---------------- */
 
 function showResult() {
 
-document.getElementById("quiz-box").classList.add("hidden");
-document.getElementById("result-box").classList.remove("hidden");
+  document.getElementById("quiz-box").classList.add("hidden");
+  document.getElementById("result-box").classList.remove("hidden");
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
 
@@ -234,6 +242,7 @@ document.getElementById("result-box").classList.remove("hidden");
 /* ---------------- RESTART ---------------- */
 
 function restartQuiz() {
+
   current = 0;
   selected = null;
 
@@ -245,8 +254,8 @@ function restartQuiz() {
     Healer: 0
   };
 
-document.getElementById("result-box").classList.add("hidden");
-document.getElementById("quiz-box").classList.remove("hidden");
+  document.getElementById("result-box").classList.add("hidden");
+  document.getElementById("quiz-box").classList.remove("hidden");
 
   loadQuestion();
 }
