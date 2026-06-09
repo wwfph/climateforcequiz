@@ -250,8 +250,16 @@ const questions = [
 /* ---------------- START ---------------- */
 
 function startQuiz() {
+
+  current = 0;
+  selected = null;
+
   document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("result-box").classList.add("hidden");
+  document.getElementById("chapter-screen").classList.add("hidden");
+
   document.getElementById("quiz-box").classList.remove("hidden");
+
   loadQuestion();
 }
 
@@ -316,25 +324,28 @@ function loadQuestion() {
 
 function showChapterIfNeeded() {
 
-  const chapterIndex = Math.floor(current / 5);
+  // HARD SAFETY LOCK
+  if (current === 0) return false;
 
-  if (current > 0 && current % 5 === 0 && current < questions.length) {
+  const chapterIndex = Math.floor((current - 1) / 5);
 
-    document.getElementById("quiz-box").classList.add("hidden");
+  if (current % 5 === 0 && current < questions.length) {
 
     const chapter = document.getElementById("chapter-screen");
+
+    document.getElementById("quiz-box").classList.add("hidden");
     chapter.classList.remove("hidden");
 
     document.getElementById("chapter-title").innerText =
-      chapters[chapterIndex - 1].title;
+      chapters[chapterIndex].title;
 
     document.getElementById("chapter-desc").innerText =
-      chapters[chapterIndex - 1].desc;
+      chapters[chapterIndex].desc;
 
-    // IMPORTANT: reset click handler every time
     chapter.onclick = null;
 
     chapter.onclick = () => {
+      chapter.onclick = null;
 
       chapter.classList.add("hidden");
       document.getElementById("quiz-box").classList.remove("hidden");
@@ -367,7 +378,7 @@ function nextQuestion() {
     return;
   }
 
-  // IMPORTANT: always let chapter handler control flow
+  // IMPORTANT: chapter check AFTER state update only
   const chapterShown = showChapterIfNeeded();
 
   if (!chapterShown) {
