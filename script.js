@@ -276,6 +276,7 @@ function updateProgress() {
 
 function loadQuestion() {
 
+  document.getElementById("chapter-screen").classList.add("hidden");
   document.getElementById("chapter-screen").onclick = null;
 
   const q = questions[current];
@@ -317,10 +318,12 @@ function showChapterIfNeeded() {
 
   const chapterIndex = Math.floor(current / 5);
 
-  if (current === 5 || current === 10 || current === 15) {
+  if (current > 0 && current % 5 === 0 && current < questions.length) {
 
     document.getElementById("quiz-box").classList.add("hidden");
-    document.getElementById("chapter-screen").classList.remove("hidden");
+
+    const chapter = document.getElementById("chapter-screen");
+    chapter.classList.remove("hidden");
 
     document.getElementById("chapter-title").innerText =
       chapters[chapterIndex - 1].title;
@@ -328,14 +331,12 @@ function showChapterIfNeeded() {
     document.getElementById("chapter-desc").innerText =
       chapters[chapterIndex - 1].desc;
 
-    // IMPORTANT: remove old handlers first
-    const chapter = document.getElementById("chapter-screen");
+    // IMPORTANT: reset click handler every time
     chapter.onclick = null;
 
     chapter.onclick = () => {
-      chapter.onclick = null;
 
-      document.getElementById("chapter-screen").classList.add("hidden");
+      chapter.classList.add("hidden");
       document.getElementById("quiz-box").classList.remove("hidden");
 
       loadQuestion();
