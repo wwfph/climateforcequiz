@@ -264,7 +264,7 @@ function startQuiz() {
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("chapter-screen").classList.add("hidden");
   document.getElementById("result-box").classList.add("hidden");
-
+  showChapter(); //
   document.getElementById("quiz-box").classList.remove("hidden");
 
   loadQuestion();
@@ -368,6 +368,29 @@ function showChapterIfNeeded() {
   return true;
 }
 
+function showChapter() {
+
+  const chapterIndex = (current / 5);
+
+  const chapter = document.getElementById("chapter-screen");
+
+  document.getElementById("quiz-box").classList.add("hidden");
+  chapter.classList.remove("hidden");
+
+  document.getElementById("chapter-title").innerText =
+    chapters[chapterIndex].title;
+
+  document.getElementById("chapter-desc").innerText =
+    chapters[chapterIndex].desc;
+
+  chapter.onclick = () => {
+    chapter.onclick = null;
+    chapter.classList.add("hidden");
+    document.getElementById("quiz-box").classList.remove("hidden");
+    loadQuestion();
+  };
+}
+
 // ====================== NEXT ======================
 function nextQuestion() {
 
@@ -386,9 +409,10 @@ function nextQuestion() {
     return;
   }
 
-  const chapterShown = showChapterIfNeeded();
-
-  if (!chapterShown) {
+  // 👉 SHOW CHAPTER BEFORE NEXT BLOCK STARTS
+  if (current % 5 === 0) {
+    showChapter();
+  } else {
     loadQuestion();
   }
 }
