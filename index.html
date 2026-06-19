@@ -295,99 +295,70 @@
       setTimeout(() => toast.remove(), 3000);
     }
 
-    function downloadResult() {
-      const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-      const r = results[winner];
-      
-      // Create canvas with proper dimensions
-      const canvas = document.createElement('canvas');
-      const width = 800, height = 1000;
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      
-      // Draw gradient background
-      const gradient = ctx.createLinearGradient(0, 0, width, height);
-      gradient.addColorStop(0, '#0f1729');
-      gradient.addColorStop(0.5, '#1e2939');
-      gradient.addColorStop(1, '#064e3b');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, width, height);
-      
-      // Draw decorative top accent bar
-      ctx.fillStyle = '#10b981';
-      ctx.fillRect(0, 0, width, 6);
-      
-      // Quiz title
-      ctx.fillStyle = '#6ee7b7';
-      ctx.font = 'bold 24px "DM Sans", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('What Climate Force Are You?', width / 2, 60);
-      
-      // Result name with emoji
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 48px "Fraunces", serif';
-      ctx.fillText(r.name, width / 2, 150);
-      
-      // Divider line
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.3)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(100, 180);
-      ctx.lineTo(width - 100, 180);
-      ctx.stroke();
-      
-      // Motto
-      ctx.fillStyle = '#a7f3d0';
-      ctx.font = 'italic 18px "DM Sans", sans-serif';
-      ctx.fillText(`"${r.motto}"`, width / 2, 230);
-      
-      // Description (wrapped text)
-      ctx.fillStyle = '#cbd5e1';
-      ctx.font = '16px "DM Sans", sans-serif';
-      ctx.textAlign = 'center';
-      const descLines = wrapText(ctx, r.desc, width - 60, 24);
-      let yPos = 280;
-      descLines.forEach(line => {
-        ctx.fillText(line, width / 2, yPos);
-        yPos += 30;
-      });
-      
-      // Strengths section
-      yPos += 20;
-      ctx.fillStyle = '#10b981';
-      ctx.font = 'bold 14px "DM Sans", sans-serif';
-      ctx.fillText('CORE STRENGTHS', width / 2, yPos);
-      
-      yPos += 40;
-      ctx.fillStyle = '#a7f3d0';
-      ctx.font = '14px "DM Sans", sans-serif';
-      const strengthsText = r.strengths.join('  •  ');
-      const strengthsLines = wrapText(ctx, strengthsText, width - 80, 20);
-      strengthsLines.forEach(line => {
-        ctx.fillText(line, width / 2, yPos);
-        yPos += 24;
-      });
-      
-      // Examples
-      yPos += 20;
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '13px "DM Sans", sans-serif';
-      ctx.fillText(`Inspired by: ${r.examples}`, width / 2, yPos);
-      
-      // Footer message
-      yPos = height - 50;
-      ctx.fillStyle = '#6ee7b7';
-      ctx.font = 'bold 14px "DM Sans", sans-serif';
-      ctx.fillText('Discover which Climate Force drives your action', width / 2, yPos);
-      
-      // Convert canvas to PNG and trigger download
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = `climate-force-${winner.toLowerCase()}.png`;
-      link.click();
-      showToast('✓ Result downloaded');
-    }
+function downloadResult() {
+  const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  const r = results[winner];
+
+  const canvas = document.createElement('canvas');
+  const width = 800, height = 1000;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = document.querySelector(
+    `[data-template-id="result-image-${winner.toLowerCase()}"]`
+  ).src;
+
+  img.onload = () => {
+    // OPTIONAL: draw hero image first (full width top section)
+    ctx.drawImage(img, 0, 0, width, 400);
+
+    // gradient overlay for readability
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(0,0,0,0.2)");
+    gradient.addColorStop(1, "#020818");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, width, 400);
+
+    // background for lower half
+    const bg = ctx.createLinearGradient(0, 400, 0, height);
+    bg.addColorStop(0, '#0f1729');
+    bg.addColorStop(1, '#064e3b');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 400, width, height);
+
+    // Title
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 48px Fraunces, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(r.name, width / 2, 470);
+
+    // Motto
+    ctx.fillStyle = '#a7f3d0';
+    ctx.font = 'italic 18px DM Sans, sans-serif';
+    ctx.fillText(`"${r.motto}"`, width / 2, 520);
+
+    // Description (wrap)
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '16px DM Sans, sans-serif';
+    const descLines = wrapText(ctx, r.desc, width - 60, 24);
+    let y = 560;
+    descLines.forEach(line => {
+      ctx.fillText(line, width / 2, y);
+      y += 26;
+    });
+
+    // download
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = `climate-force-${winner.toLowerCase()}.png`;
+    link.click();
+
+    showToast('✓ Result downloaded');
+  };
+}
     
     function wrapText(ctx, text, maxWidth, lineHeight) {
       const words = text.split(' ');
