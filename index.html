@@ -308,39 +308,29 @@ function downloadResult() {
 
 const img = new Image();
 img.crossOrigin = "anonymous";
-img.src = document.querySelector(
+const src = document.querySelector(
   `[data-template-id="result-image-${winner.toLowerCase()}"]`
-).src;
+)?.src;
+
+  img.src = src;
 
 img.onload = () => {
   // HERO IMAGE (object-cover style, no stretching)
   const targetW = width;
   const targetH = 400;
 
-  const imgRatio = img.width / img.height;
-  const boxRatio = targetW / targetH;
-
-  let sx, sy, sw, sh;
-
-  if (imgRatio > boxRatio) {
-    // image is wider → crop sides
-    sh = img.height;
-    sw = sh * boxRatio;
-    sx = (img.width - sw) / 2;
-    sy = 0;
-  } else {
-    // image is taller → crop top/bottom
-    sw = img.width;
-    sh = sw / boxRatio;
-    sx = 0;
-    sy = (img.height - sh) / 2;
-  }
-
-  ctx.drawImage(
-    img,
-    sx, sy, sw, sh,     // source crop
-    0, 0, targetW, targetH // destination
+   const scale = Math.max(
+    targetW / img.naturalWidth,
+    targetH / img.naturalHeight
   );
+
+  const w = img.naturalWidth * scale;
+  const h = img.naturalHeight * scale;
+
+  const x = (targetW - w) / 2;
+  const y = (targetH - h) / 2;
+
+  ctx.drawImage(img, x, y, w, h);
 
     // Draw gradient background
       const gradient = ctx.createLinearGradient(0, 0, width, height);
