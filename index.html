@@ -4,10 +4,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Climate Champion Quiz</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Fraunces:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Fraunces:wght@600;700&amp;family=Instrument+Serif:wght@400;600&amp;display=swap" rel="stylesheet">
   <style>
     body { font-family: 'DM Sans', sans-serif; }
     h1, h2, .arc-title { font-family: 'Fraunces', serif; }
+    #q-text { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 600; }
+    .choice-btn { font-family: 'DM Sans', sans-serif; }
     .fade-in { animation: fadeIn 0.5s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     .choice-btn { transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.15); }
@@ -21,47 +23,61 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="/_sdk/resizing_sdk.js" type="text/javascript"></script>
  </head>
- <body data-template-id="__page-root" class="min-h-screen flex items-center justify-center p-4" style="background: linear-gradient(135deg, rgb(15, 23, 42), rgb(30, 41, 59), rgb(6, 78, 59));">
+ <body data-template-id="__page-root" class="min-h-screen flex items-center justify-center p-4" style="background: rgb(2, 8, 24);">
   <!-- START SCREEN -->
   <div id="start-screen" class="fade-in text-center max-w-lg mx-auto">
-   <div class="rounded-2xl overflow-hidden mb-6 shadow-2xl border border-white/10">
-    <img data-template-id="hero-image" class="canva-image w-full h-56 object-cover" loading="lazy" src="https://images.pexels.com/photos/4028941/pexels-photo-4028941.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1280" alt="Dark dramatic clouds gathering over urban buildings, hinting at an approaching storm.">
+   <div class="grid grid-cols-5 gap-3 mb-8">
+    <div class="rounded-lg overflow-hidden border border-white/10">
+     <img data-template-id="result-canopy-img" class="canva-image w-full h-28 object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Canopy.png">
+    </div>
+    <div class="rounded-lg overflow-hidden border border-white/10">
+     <img data-template-id="result-ember-img" class="canva-image w-full h-28 object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Ember.png">
+    </div>
+    <div class="rounded-lg overflow-hidden border border-white/10">
+     <img data-template-id="result-tide-img" class="canva-image w-full h-28 object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Tide.png">
+    </div>
+    <div class="rounded-lg overflow-hidden border border-white/10">
+     <img data-template-id="result-echo-img" class="canva-image w-full h-28 object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Echo.png">
+    </div>
+    <div class="rounded-lg overflow-hidden border border-white/10">
+     <img data-template-id="result-summit-img" class="canva-image w-full h-28 object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Summit.png">
+    </div>
    </div>
-   <h1 data-template-id="quiz-title" class="canva-text text-3xl font-bold mb-3 glow" style="color: rgb(110, 231, 183); font-weight: 700; font-style: normal; font-size: 32px;">What Climate Force Are You?</h1>
-   <p data-template-id="quiz-subtitle" class="canva-text text-lg mb-8 opacity-80" style="color: rgb(148, 163, 184); font-weight: 400; font-style: normal; font-size: 16px;">20 questions. 4 acts. Discover which of the Five Forces drives your climate action.</p><button data-template-id="start-button" class="canva-button px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all" onclick="startQuiz()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🌍 Discover Your Force</button>
+   <h1 data-template-id="quiz-title" class="canva-text text-3xl font-bold mb-6 glow" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 53px;">What Climate Force Are You?</h1>
+   <p data-template-id="quiz-subtitle" class="canva-text text-lg mb-8 opacity-80" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Discover which of the Five Forces drives your climate action.</p><button data-template-id="start-button" class="canva-button px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all" onclick="startQuiz()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">TAKE THE QUIZ</button>
   </div><!-- ARC SCREEN -->
   <div id="arc-screen" class="fade-in text-center max-w-lg mx-auto hidden">
    <div class="mb-8">
     <span id="arc-badge" class="act-badge inline-block px-4 py-1 rounded-full text-sm font-bold text-white mb-4 shadow-lg"></span>
-    <h2 id="arc-title" class="arc-title text-3xl font-bold mb-3 glow"></h2>
-    <p id="arc-desc" class="text-lg opacity-80"></p>
-   </div><button class="px-6 py-3 rounded-full font-semibold bg-white/10 border border-emerald-400/40 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all" onclick="continueFromArc()">🌍 Begin</button>
+    <h2 id="arc-title" class="arc-title text-3xl font-bold mb-3 glow text-white"></h2>
+    <p id="arc-desc" class="text-lg opacity-80 text-white"></p>
+   </div><button class="px-6 py-3 rounded-full font-semibold bg-white/10 border border-emerald-400/40 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all text-white" onclick="continueFromArc()">🌍 Begin</button>
   </div><!-- QUESTION SCREEN -->
   <div id="question-screen" class="fade-in max-w-xl mx-auto w-full hidden">
    <div class="mb-6">
     <div class="flex justify-between items-center mb-2">
-     <span id="q-number" class="text-sm font-medium opacity-60"></span> <span id="q-progress-text" class="text-sm font-medium opacity-60"></span>
+     <span id="q-number" class="text-sm font-medium opacity-60 text-white"></span> <span id="q-progress-text" class="text-sm font-medium opacity-60 text-white"></span>
     </div>
     <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
      <div id="progress-bar" class="h-full rounded-full transition-all duration-500" style="width:0%"></div>
     </div>
    </div>
-   <h2 id="q-text" class="text-xl font-bold mb-6"></h2>
+   <h2 id="q-text" class="text-xl font-bold mb-6 text-white"></h2>
    <div id="choices" class="space-y-3"></div>
   </div><!-- RESULTS SCREEN -->
   <div id="results-screen" class="fade-in text-center max-w-lg mx-auto hidden">
    <div class="rounded-2xl overflow-hidden mb-6 shadow-2xl border border-white/10">
-    <img data-template-id="result-canopy-img" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="https://images.pexels.com/photos/1179229/pexels-photo-1179229.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A high-angle view of a lush, vibrant pine forest, showcasing nature's beauty from above."> <img data-template-id="result-ember-img" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="https://images.pexels.com/photos/3651820/pexels-photo-3651820.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A hand reaching towards a glowing hanging light bulb symbolizing creativity and illumination."> <img data-template-id="result-tide-img" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="https://images.pexels.com/photos/1756665/pexels-photo-1756665.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="A large group holding hands at the beach during sunset, reflecting in the water."> <img data-template-id="result-echo-img" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="https://images.pexels.com/photos/8638302/pexels-photo-8638302.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Confident woman using a megaphone against a soft pink background."> <img data-template-id="result-summit-img" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="https://images.pexels.com/photos/2335126/pexels-photo-2335126.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=800" alt="Epic winter landscape of sharp mountain peaks surrounded by mist in Troms, Norway.">
+    <img data-template-id="result-image-canopy" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="canva://MAHM_ZmIy4Y/1" alt="Canopy.png"> <img data-template-id="result-image-ember" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="canva://MAHM_Y6a0Tg/1" alt="Ember.png"> <img data-template-id="result-image-tide" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="canva://MAHM_W8p_LI/1" alt="Tide.png"> <img data-template-id="result-image-echo" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="canva://MAHM_dHI3us/1" alt="Echo.png"> <img data-template-id="result-image-summit" class="canva-image w-full h-56 object-cover hidden" loading="lazy" src="canva://MAHM_aeFPeA/1" alt="Epic winter landscape of sharp mountain peaks surrounded by mist in Troms, Norway.">
    </div>
-   <p id="result-label" class="text-sm font-bold uppercase tracking-widest opacity-60 mb-2"></p>
-   <h1 id="result-title" class="text-3xl font-bold mb-2 glow" style="font-family:'Fraunces',serif"></h1>
-   <p id="result-motto" class="text-base italic opacity-70 mb-4"></p>
-   <p id="result-desc" class="text-lg opacity-80 mb-4 leading-relaxed"></p>
+   <p id="result-label" class="text-sm font-bold uppercase tracking-widest opacity-60 mb-2 text-white"></p>
+   <h1 id="result-title" class="text-5xl font-bold mb-2 glow text-white" style="font-family:'Fraunces',serif"></h1>
+   <p id="result-motto" class="text-base italic opacity-70 mb-4 text-white"></p>
+   <p id="result-desc" class="text-lg opacity-80 mb-4 leading-relaxed text-white"></p>
    <div id="result-strengths" class="flex flex-wrap gap-2 justify-center mb-4"></div>
-   <p id="result-examples" class="text-sm opacity-60 mb-6"></p>
+   <p id="result-examples" class="text-sm opacity-60 mb-6 text-white"></p>
    <div class="flex gap-3 justify-center mb-6">
-    <button onclick="downloadResult()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm">📥 Download</button> <button onclick="shareQuiz()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm">🎯 Share</button>
-   </div><button id="explore-force-btn" class="w-full px-8 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm mb-3" onclick="exploreForce()"></button> <button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all" onclick="restart()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🔄 Play Again</button>
+    <button onclick="downloadResult()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white">📥 Download</button> <button onclick="shareQuiz()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white">🎯 Share</button>
+   </div><button id="explore-force-btn" class="w-full px-8 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white mb-3" onclick="exploreForce()"></button> <button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-white" onclick="restart()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🔄 Play Again</button>
   </div>
   <script src="/_sdk/editing_sdk.js"></script>
   <script>
@@ -184,7 +200,7 @@
       container.innerHTML = '';
       shuffle(q.a).forEach(choice => {
         const btn = document.createElement('button');
-        btn.className = 'choice-btn w-full text-left p-4 rounded-xl bg-white/5 border border-white/15 backdrop-blur hover:bg-emerald-500/10 font-medium';
+        btn.className = 'choice-btn w-full text-left p-4 rounded-xl bg-white/5 border border-white/15 backdrop-blur hover:bg-emerald-500/10 font-medium text-white';
         btn.textContent = choice.text;
         btn.onclick = () => answer(choice.type);
         container.appendChild(btn);
@@ -220,10 +236,15 @@
       document.getElementById('result-examples').textContent = `Inspired by: ${r.examples}`;
       document.getElementById('explore-force-btn').textContent = `🌍 Explore the ${r.name.split(' ')[1]} Force`;
 
-      types.forEach(type => {
-        const img = document.querySelector('[data-template-id="result-' + type.toLowerCase() + '-img"]');
-        if (img) img.classList.toggle('hidden', type !== winner);
+      // Hide all images first
+      document.querySelectorAll('[data-template-id^="result-image-"]').forEach(img => {
+        img.classList.add('hidden');
       });
+      
+      // Show only the matching result image
+      const matchingImg = document.querySelector(`[data-template-id="result-image-${winner.toLowerCase()}"]`);
+      if (matchingImg) matchingImg.classList.remove('hidden');
+      
       show('results-screen');
     }
 
@@ -377,5 +398,5 @@
 
     lucide.createIcons();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0df1171e3549c38',t:'MTc4MTgzNTc2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a1008ed7f50c1e38',t:'MTc4MjE4NjkzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body></html>
