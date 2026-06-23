@@ -163,16 +163,21 @@
       return a;
     }
 
-    function show(id) {
-      ['start-screen','arc-screen','question-screen','results-screen'].forEach(s => {
-        document.getElementById(s).classList.add('hidden');
-        document.getElementById(s).classList.remove('fade-in');
-      });
-      const el = document.getElementById(id);
-      el.classList.remove('hidden');
-      void el.offsetWidth;
-      el.classList.add('fade-in');
-    }
+function show(id) {
+  const screens = ['start-screen','arc-screen','question-screen','results-screen'];
+
+  screens.forEach(s => {
+    const el = document.getElementById(s);
+    el.style.display = 'none';
+    el.classList.remove('fade-in');
+  });
+
+  const target = document.getElementById(id);
+  target.style.display = 'block';
+
+  void target.offsetWidth;
+  target.classList.add('fade-in');
+}
 
     function startQuiz() {
       currentQ = 0;
