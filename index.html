@@ -236,17 +236,28 @@
       document.getElementById('result-examples').textContent = `Inspired by: ${r.examples}`;
       document.getElementById('explore-force-btn').textContent = `🌍 Explore the ${r.name.split(' ')[1]} Force`;
 
-      // Hide all images first
-      document.querySelectorAll('[data-template-id^="result-image-"]').forEach(img => {
-        img.classList.add('hidden');
-      });
-      
-      // Show only the matching result image
-      const matchingImg = document.querySelector(`[data-template-id="result-image-${winner.toLowerCase()}"]`);
-      if (matchingImg) matchingImg.classList.remove('hidden');
-      
-      show('results-screen');
-    }
+// Hide all images first
+document.querySelectorAll('[data-template-id^="result-image-"]').forEach(img => {
+  img.classList.add('hidden');
+});
+
+// Normalize winner just in case
+const key = winner.trim().toLowerCase();
+
+// Show only matching image
+const imgMap = {
+  canopy: 'result-image-canopy',
+  ember: 'result-image-ember',
+  tide: 'result-image-tide',
+  echo: 'result-image-echo',
+  summit: 'result-image-summit'
+};
+
+const imgId = imgMap[key];
+if (imgId) {
+  const el = document.querySelector(`[data-template-id="${imgId}"]`);
+  if (el) el.classList.remove('hidden');
+}
 
     function restart() { show('start-screen'); }
 
