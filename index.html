@@ -95,8 +95,9 @@
    </div><button id="explore-force-btn" class="w-full px-8 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white mb-3" onclick="exploreForce()"></button> <button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-white" onclick="restart()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🔄 Play Again</button>
   </div>
   <script>
-    const types = ['Canopy','Ember','Tide','Echo','Summit'];
-    const scores = {Canopy:0,Ember:0,Tide:0,Echo:0,Summit:0};
+    (() => {
+  const types = ['Canopy','Ember','Tide','Echo','Summit'];
+  const scores = {Canopy:0,Ember:0,Tide:0,Echo:0,Summit:0};
 
     const arcs = [
       {badge:'ACT 1', title:'⚡ Warning Signs', desc:'The climate shifts. How do you respond to the first signals?'},
@@ -370,6 +371,6 @@ console.log("results screen should be visible");
       window.open(`https://wwf-philippines.my.canva.site/forces-of-climate-action/${forceSlug}`, '_blank');
     }
 
-    lucide.createIcons();
+    lucide.createIcons();})();
   </script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body></html>
