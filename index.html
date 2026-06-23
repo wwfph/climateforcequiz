@@ -115,27 +115,207 @@ Choose the response that feels most like you. </p>
     ];
 
     const questions = [
-      {q:"Unusually hot summers now last longer in your city. What is your first concern?",a:[{text:"Heat stress on vulnerable wildlife and ecosystems.",type:"Canopy"},{text:"Designing new cooling technologies.",type:"Ember"},{text:"Mobilizing community cooling centers together.",type:"Tide"},{text:"Raising public awareness through storytelling.",type:"Echo"},{text:"Studying the temperature data trends.",type:"Summit"}]},
-      {q:"Rain patterns suddenly become unpredictable. You notice:",a:[{text:"Habitat disruption for local species.",type:"Canopy"},{text:"Opportunity for innovative water systems.",type:"Ember"},{text:"Communities need to organize together.",type:"Tide"},{text:"People need to hear about this urgently.",type:"Echo"},{text:"Shifting rainfall data worth investigating.",type:"Summit"}]},
-      {q:"Sea levels are slowly rising. Your biggest concern is:",a:[{text:"Coastal ecosystems and mangroves at risk.",type:"Canopy"},{text:"Floating city concepts and green engineering.",type:"Ember"},{text:"Fishing communities losing their way of life together.",type:"Tide"},{text:"Amplifying the voices of affected coastal communities.",type:"Echo"},{text:"Measurement accuracy and long-term projections.",type:"Summit"}]},
-      {q:"A mild typhoon causes unexpected flooding. You think:",a:[{text:"Protecting natural flood barriers like wetlands.",type:"Canopy"},{text:"Better infrastructure design opportunities.",type:"Ember"},{text:"Stronger collective disaster response.",type:"Tide"},{text:"Sharing affected families' stories widely.",type:"Echo"},{text:"Analyzing storm pattern data.",type:"Summit"}]},
-      {q:"Urban heat becomes a daily struggle. You respond by:",a:[{text:"Planting urban forests and green corridors.",type:"Canopy"},{text:"Smart cooling innovations and green roofs.",type:"Ember"},{text:"Organizing neighborhood cooling cooperatives.",type:"Tide"},{text:"Creating campaigns about heat inequality.",type:"Echo"},{text:"Heat mapping and citizen science projects.",type:"Summit"}]},
-      {q:"A super typhoon is approaching your region. Your instinct is:",a:[{text:"Ensure wildlife rescue plans are activated.",type:"Canopy"},{text:"Deploy innovative early warning systems.",type:"Ember"},{text:"Rally the community for collective preparation.",type:"Tide"},{text:"Broadcast urgent warnings far and wide.",type:"Echo"},{text:"Track storm data and share findings.",type:"Summit"}]},
-      {q:"Flooding becomes more frequent in cities. You notice:",a:[{text:"Loss of natural drainage systems.",type:"Canopy"},{text:"Urban redesign opportunities with green solutions.",type:"Ember"},{text:"More displaced families needing collective support.",type:"Tide"},{text:"Stories that need to be told to drive change.",type:"Echo"},{text:"Rainfall pattern shifts worth documenting.",type:"Summit"}]},
-      {q:"A blackout happens during extreme weather. You:",a:[{text:"Check that conservation systems are safe.",type:"Canopy"},{text:"Think of renewable energy solutions.",type:"Ember"},{text:"Coordinate neighborhood mutual aid.",type:"Tide"},{text:"Document the experience to raise awareness.",type:"Echo"},{text:"Analyze grid failure patterns.",type:"Summit"}]},
-      {q:"Evacuation centers are overcrowded. You focus on:",a:[{text:"Creating safe green spaces for relief.",type:"Canopy"},{text:"Better shelter design innovations.",type:"Ember"},{text:"Building solidarity among evacuees.",type:"Tide"},{text:"Amplifying evacuees' voices to leaders.",type:"Echo"},{text:"Capacity data and logistics research.",type:"Summit"}]},
-      {q:"Misinformation spreads during disasters. You:",a:[{text:"Focus on protecting what's real and grounded.",type:"Canopy"},{text:"Improve communication tool design.",type:"Ember"},{text:"Organize trusted community networks.",type:"Tide"},{text:"Counter misinformation with powerful storytelling.",type:"Echo"},{text:"Verify facts and trace sources.",type:"Summit"}]},
-      {q:"Communities begin rebuilding after disasters. You contribute:",a:[{text:"Restoring damaged habitats and green spaces.",type:"Canopy"},{text:"Designing resilient, sustainable buildings.",type:"Ember"},{text:"Organizing collective rebuilding efforts.",type:"Tide"},{text:"Sharing recovery stories to inspire others.",type:"Echo"},{text:"Assessing what worked and what didn't.",type:"Summit"}]},
-      {q:"Food supply becomes unstable. You focus on:",a:[{text:"Protecting biodiversity and seed banks.",type:"Canopy"},{text:"Urban farming and food tech solutions.",type:"Ember"},{text:"Community food sharing networks.",type:"Tide"},{text:"Campaigning for food justice.",type:"Echo"},{text:"Supply chain analysis and research.",type:"Summit"}]},
-      {q:"Climate migration increases. You prioritize:",a:[{text:"Preserving the lands people are leaving.",type:"Canopy"},{text:"New sustainable city development plans.",type:"Ember"},{text:"Welcoming communities and integration.",type:"Tide"},{text:"Telling migrants' stories to build empathy.",type:"Echo"},{text:"Migration pattern research.",type:"Summit"}]},
-      {q:"Schools are disrupted by climate events. You:",a:[{text:"Create nature-based learning environments.",type:"Canopy"},{text:"Develop innovative remote learning tools.",type:"Ember"},{text:"Organize peer support learning circles.",type:"Tide"},{text:"Campaign for climate education funding.",type:"Echo"},{text:"Research disruption impacts on learning.",type:"Summit"}]},
-      {q:"Mental health impacts rise after disasters. You:",a:[{text:"Create healing gardens and nature therapy.",type:"Canopy"},{text:"Innovate mental health technology tools.",type:"Ember"},{text:"Build peer support community groups.",type:"Tide"},{text:"Destigmatize through public storytelling.",type:"Echo"},{text:"Study the data on climate anxiety.",type:"Summit"}]},
-      {q:"The country invests heavily in climate solutions. You:",a:[{text:"Push for protected areas and conservation.",type:"Canopy"},{text:"Design breakthrough innovations.",type:"Ember"},{text:"Ensure community voices shape the plan.",type:"Tide"},{text:"Amplify success stories to maintain momentum.",type:"Echo"},{text:"Evaluate effectiveness with research.",type:"Summit"}]},
-      {q:"Renewable energy becomes widespread. You:",a:[{text:"Ensure it doesn't harm ecosystems.",type:"Canopy"},{text:"Invent next-generation systems.",type:"Ember"},{text:"Help communities adopt it together.",type:"Tide"},{text:"Celebrate the transition publicly.",type:"Echo"},{text:"Monitor energy data and outcomes.",type:"Summit"}]},
-      {q:"Cities are redesigned for floods and heat. You:",a:[{text:"Integrate nature into every design.",type:"Canopy"},{text:"Reimagine urban infrastructure creatively.",type:"Ember"},{text:"Ensure inclusive community participation.",type:"Tide"},{text:"Tell the story of transformation.",type:"Echo"},{text:"Evaluate design models with data.",type:"Summit"}]},
-      {q:"Climate education becomes mandatory. You:",a:[{text:"Champion outdoor and nature-based learning.",type:"Canopy"},{text:"Create innovative learning tools.",type:"Ember"},{text:"Build student-led action networks.",type:"Tide"},{text:"Make the message compelling and viral.",type:"Echo"},{text:"Improve curriculum through research.",type:"Summit"}]},
-      {q:"You look at the future. You feel:",a:[{text:"Grounded — ready to protect what matters.",type:"Canopy"},{text:"Inspired — full of ideas to build.",type:"Ember"},{text:"Connected — stronger together.",type:"Tide"},{text:"Empowered — ready to speak up.",type:"Echo"},{text:"Curious — so much still to discover.",type:"Summit"}]}
-    ];
+{
+  q: "The heat has lingered for weeks. On the jeepney ride home, someone jokes that this must be the hottest year yet. A few people laugh. Others nod quietly. As you look out the window, what stays on your mind?",
+  a: [
+    { text: "The people, animals, and ecosystems that may struggle if this becomes the new normal.", type: "Canopy" },
+    { text: "The new ideas communities might need to adapt.", type: "Ember" },
+    { text: "How differently people around you seem to be experiencing it.", type: "Tide" },
+    { text: "Why more people aren't talking about it.", type: "Echo" },
+    { text: "What's causing these changes in the first place.", type: "Summit" }
+  ]
+},
+{
+  q: "You're visiting a beach you've loved since childhood. The fishing boats are still there. The sari-sari store near the shore is still there. But the shoreline isn't where you remember it. A local resident points to where the water used to be years ago. What pulls your attention first?",
+  a: [
+    { text: "The reefs, mangroves, and wildlife that seem more vulnerable than before.", type: "Canopy" },
+    { text: "The possibilities for restoring and protecting the coastline.", type: "Ember" },
+    { text: "The people finding ways to adapt to the changes.", type: "Tide" },
+    { text: "The stories of those who have watched this place transform.", type: "Echo" },
+    { text: "The environmental forces that shaped this moment.", type: "Summit" }
+  ]
+},
+{
+  q: "A friend sends you an article about a climate issue you've never heard of before. You meant to read it for two minutes. Twenty minutes later, you're still scrolling. What keeps you reading?",
+  a: [
+    { text: "Learning who or what is being affected.", type: "Canopy" },
+    { text: "Discovering solutions people are already testing.", type: "Ember" },
+    { text: "Seeing how communities are responding.", type: "Tide" },
+    { text: "Understanding why more people should know about it.", type: "Echo" },
+    { text: "Digging deeper into the evidence.", type: "Summit" }
+  ]
+},
+{
+  q: "After days of heavy rain, flooding returns to parts of your community. One image sticks with you: neighbors helping each other move belongings. What stays with you most?",
+  a: [
+    { text: "The people, places, and ecosystems facing the greatest impacts.", type: "Canopy" },
+    { text: "The possibility of reducing future flood risks.", type: "Ember" },
+    { text: "The way people come together during difficult moments.", type: "Tide" },
+    { text: "The personal stories behind the headlines.", type: "Echo" },
+    { text: "The patterns that might explain why this keeps happening.", type: "Summit" }
+  ]
+},
+{
+  q: "Months pass. The changes are no longer isolated events. They're becoming part of everyday life. What feels most true about the role you'd want to play?",
+  a: [
+    { text: "Helping protect the people, places, and living things that could be lost.", type: "Canopy" },
+    { text: "Finding new ways to help communities adapt and thrive.", type: "Ember" },
+    { text: "Bringing people together around shared challenges.", type: "Tide" },
+    { text: "Helping more people understand why these issues matter.", type: "Echo" },
+    { text: "Deepening our understanding of what's happening and why.", type: "Summit" }
+  ]
+},
+{
+  q: "Your phone starts filling with typhoon alerts. What are you watching most closely?",
+  a: [
+    { text: "The people, species, and places most at risk.", type: "Canopy" },
+    { text: "Whether communities have what they need to prepare.", type: "Tide" },
+    { text: "Who might need help or support.", type: "Tide" },
+    { text: "Whether accurate information is reaching people.", type: "Echo" },
+    { text: "What the forecasts and data are telling us.", type: "Summit" }
+  ]
+},
+{
+  q: "The power has been out for hours after a major storm. Neighbors gather outside sharing food and updates. What stands out most?",
+  a: [
+    { text: "The people making sure everyone is safe and cared for.", type: "Tide" },
+    { text: "The creative ways people solve problems together.", type: "Ember" },
+    { text: "The sense of community that emerges during difficult times.", type: "Tide" },
+    { text: "The stories people are sharing about what they've experienced.", type: "Echo" },
+    { text: "The clues that help explain what happened.", type: "Summit" }
+  ]
+},
+{
+  q: "The next morning, people begin cleaning up debris and planning what comes next. Where do you naturally find yourself?",
+  a: [
+    { text: "Helping protect vulnerable people, places, and ecosystems.", type: "Canopy" },
+    { text: "Looking for practical ways to rebuild stronger.", type: "Ember" },
+    { text: "Bringing people together around a common goal.", type: "Tide" },
+    { text: "Helping keep people informed and motivated.", type: "Echo" },
+    { text: "Trying to understand what can be learned from the experience.", type: "Summit" }
+  ]
+},
+{
+  q: "Misinformation spreads during disasters. What's your first instinct?",
+  a: [
+    { text: "Think about who might be harmed by misinformation.", type: "Canopy" },
+    { text: "Look for better ways accurate information can reach people.", type: "Ember" },
+    { text: "Check in with trusted people and networks.", type: "Tide" },
+    { text: "Help others separate facts from fear.", type: "Echo" },
+    { text: "Verify information before drawing conclusions.", type: "Summit" }
+  ]
+},
+{
+  q: "Someone is leaving their hometown after repeated floods. What weighs on you most?",
+  a: [
+    { text: "The places and ecosystems they're being forced to leave behind.", type: "Canopy" },
+    { text: "How communities can adapt and rebuild differently.", type: "Ember" },
+    { text: "Making sure they don't go through the transition alone.", type: "Tide" },
+    { text: "Ensuring stories like theirs are heard.", type: "Echo" },
+    { text: "Understanding why these changes are happening.", type: "Summit" }
+  ]
+},
+{
+  q: "You're planting mangroves after storms. What are you hoping they've found?",
+  a: [
+    { text: "Signs that wildlife is returning.", type: "Canopy" },
+    { text: "Evidence that restoration efforts are working.", type: "Ember" },
+    { text: "People working together to bring the area back.", type: "Tide" },
+    { text: "A story you'll want to tell later.", type: "Echo" },
+    { text: "A clue about how recovery is unfolding.", type: "Summit" }
+  ]
+},
+{
+  q: "At the palengke, farmers compare seeds after drought. What makes you stay?",
+  a: [
+    { text: "The different crops and varieties being discussed.", type: "Canopy" },
+    { text: "The new approaches people are testing.", type: "Ember" },
+    { text: "The knowledge being shared.", type: "Summit" },
+    { text: "The stories behind the seeds.", type: "Echo" },
+    { text: "The reasons some crops performed differently.", type: "Summit" }
+  ]
+},
+{
+  q: "A neighbor tells you they moved after repeated flooding. What do you ask first?",
+  a: [
+    { text: "How the environment changed over time.", type: "Summit" },
+    { text: "How the community adapted.", type: "Tide" },
+    { text: "What helped people settle somewhere new.", type: "Ember" },
+    { text: "What it felt like to leave.", type: "Echo" },
+    { text: "What others can learn from the experience.", type: "Summit" }
+  ]
+},
+{
+  q: "You take a new route home with more green spaces. Where do you go?",
+  a: [
+    { text: "Toward the greener parts of the area.", type: "Canopy" },
+    { text: "Along the new pathways to see where they lead.", type: "Summit" },
+    { text: "Through spaces where people are gathering.", type: "Tide" },
+    { text: "Wherever gives the best view of what's happening.", type: "Echo" },
+    { text: "Following whatever helps you understand what changed.", type: "Summit" }
+  ]
+},
+{
+  q: "Residents are asked to choose the city's next environmental project. One option pulls you back.",
+  a: [
+    { text: "Restoring ecosystems and habitats.", type: "Canopy" },
+    { text: "Investing in new solutions and technologies.", type: "Ember" },
+    { text: "Helping communities prepare for future risks.", type: "Tide" },
+    { text: "Getting more people involved.", type: "Echo" },
+    { text: "Comparing long-term impacts.", type: "Summit" }
+  ]
+},
+{
+  q: "You return to a beach and notice mangroves have grown back. What keeps you walking?",
+  a: [
+    { text: "Signs that wildlife has returned.", type: "Canopy" },
+    { text: "Curiosity about what changed.", type: "Summit" },
+    { text: "The people caring for the coastline.", type: "Tide" },
+    { text: "Watching others experience the place.", type: "Echo" },
+    { text: "Questions about how recovery happened.", type: "Summit" }
+  ]
+},
+{
+  q: "After a super typhoon, you check your phone first for:",
+  a: [
+    { text: "Updates about nearby ecosystems.", type: "Canopy" },
+    { text: "What helped keep systems running.", type: "Ember" },
+    { text: "How different communities are doing.", type: "Tide" },
+    { text: "Stories from people who experienced it.", type: "Echo" },
+    { text: "What worked and what didn't.", type: "Summit" }
+  ]
+},
+{
+  q: "It's a hot week and some streets feel cooler than others. What catches your attention?",
+  a: [
+    { text: "The amount of shade and greenery.", type: "Canopy" },
+    { text: "How streets and buildings are designed.", type: "Ember" },
+    { text: "How people use the spaces.", type: "Tide" },
+    { text: "The activity and energy in the area.", type: "Echo" },
+    { text: "The patterns behind the differences.", type: "Summit" }
+  ]
+},
+{
+  q: "A reusable packaging system is introduced. What surprises you most?",
+  a: [
+    { text: "How little waste is left behind.", type: "Canopy" },
+    { text: "How many items were redesigned.", type: "Ember" },
+    { text: "How many people take part naturally.", type: "Tide" },
+    { text: "How quickly it became normal.", type: "Echo" },
+    { text: "How the system works across places.", type: "Summit" }
+  ]
+},
+{
+  q: "People reflect on how much has changed over the years. What stays with you?",
+  a: [
+    { text: "The places and species still needing protection.", type: "Canopy" },
+    { text: "The next solutions yet to be built.", type: "Ember" },
+    { text: "The communities still needing support.", type: "Tide" },
+    { text: "The people who could make a difference.", type: "Echo" },
+    { text: "The unanswered questions.", type: "Summit" }
+  ]
+}
+];
 
     const results = {
       Canopy:{
