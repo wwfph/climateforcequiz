@@ -94,7 +94,8 @@
     <button onclick="downloadResult()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white">📥 Download</button> <button onclick="shareQuiz()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white">🎯 Share</button>
    </div><button id="explore-force-btn" class="w-full px-8 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white mb-3" onclick="exploreForce()"></button> <button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-white" onclick="restart()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🔄 Play Again</button>
   </div>
-  <script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+   <script>
     (() => {
   const types = ['Canopy','Ember','Tide','Echo','Summit'];
   const scores = {Canopy:0,Ember:0,Tide:0,Echo:0,Summit:0};
@@ -300,7 +301,11 @@ show('results-screen');
 console.log("results screen should be visible");
       }
 
-    function restart() { show('start-screen'); }
+function restart() {
+  currentQ = 0;
+  Object.keys(scores).forEach(k => scores[k] = 0);
+  show('start-screen');
+}
 
     function showToast(msg) {
       const toast = document.createElement('div');
@@ -372,5 +377,5 @@ console.log("results screen should be visible");
     }
 
     lucide.createIcons();})();
-  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </script>
 </body></html>
