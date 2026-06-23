@@ -23,23 +23,34 @@
  <body data-template-id="__page-root" class="min-h-screen flex items-center justify-center p-4" style="background: rgb(2, 8, 24);">
   <!-- START SCREEN -->
   <div id="start-screen" class="fade-in text-center max-w-lg mx-auto">
-   <div class="grid grid-cols-5 gap-3 mb-8">
-    <div class="rounded-lg overflow-hidden border border-white/10">
-     <img data-template-id="result-canopy-img" class="w-full aspect-square object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Canopy.png">
-    </div>
-    <div class="rounded-lg overflow-hidden border border-white/10">
-     <img data-template-id="result-ember-img" class="w-full aspect-square object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Ember.png">
-    </div>
-    <div class="rounded-lg overflow-hidden border border-white/10">
-     <img data-template-id="result-tide-img" class="w-full aspect-square object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Tide.png">
-    </div>
-    <div class="rounded-lg overflow-hidden border border-white/10">
-     <img data-template-id="result-echo-img" class="w-full aspect-square object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Echo.png">
-    </div>
-    <div class="rounded-lg overflow-hidden border border-white/10">
-     <img data-template-id="result-summit-img" class="w-full aspect-square object-cover" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Summit.png">
-    </div>
-   </div>
+ <div class="grid grid-cols-5 gap-2 mb-8">
+  
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Canopy.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Ember.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Tide.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Echo.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Summit.png"
+         class="w-full h-full object-cover">
+  </div>
+
+</div>
    <h1 data-template-id="quiz-title" class="canva-text text-3xl font-bold mb-6 glow" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 53px;">What Climate Force Are You?</h1>
    <p data-template-id="quiz-subtitle" class="canva-text text-lg mb-8 opacity-80" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Discover which of the Five Forces drives your climate action.</p><button data-template-id="start-button" class="canva-button px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all" onclick="startQuiz()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">TAKE THE QUIZ</button>
   </div><!-- ARC SCREEN -->
