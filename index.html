@@ -448,5 +448,380 @@ console.log("results screen should be visible");
     }
 
     lucide.createIcons();
-  </script>
+  </script><!doctype html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climate Champion Quiz</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Fraunces:wght@600;700&amp;family=Instrument+Serif:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    h1, h2, .arc-title { font-family: 'Fraunces', serif; }
+    #q-text { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 600; }
+    .choice-btn { font-family: 'DM Sans', sans-serif; }
+    .fade-in { animation: fadeIn 0.5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .choice-btn { transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.15); }
+    .choice-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(16,185,129,0.3); border-color: rgba(16,185,129,0.5); }
+    .glow { text-shadow: 0 0 20px rgba(16,185,129,0.4); }
+    .act-badge { background: linear-gradient(135deg, #10b981, #059669); }
+    #progress-bar { background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7); }
+    .strength-tag { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+ </head>
+ <body data-template-id="__page-root" class="min-h-screen flex items-center justify-center p-4" style="background: rgb(2, 8, 24);">
+  
+   <!-- START SCREEN -->
+  <div id="start-screen" class="fade-in text-center max-w-lg mx-auto">
+ <div class="grid grid-cols-5 gap-2 mb-8">
+
+   <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Canopy.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Ember.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Tide.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Echo.png"
+         class="w-full h-full object-cover">
+  </div>
+
+  <div class="rounded-lg overflow-hidden border border-white/10 aspect-square">
+    <img src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Summit.png"
+         class="w-full h-full object-cover">
+  </div>
+  </div>
+
+   <h1 data-template-id="quiz-title" class="canva-text text-3xl font-bold mb-6 glow" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 53px;">What Climate Force Are You?</h1>
+   <p data-template-id="quiz-subtitle" class="canva-text text-lg mb-8 opacity-80" style="color: rgb(255, 255, 255); font-weight: 400; font-style: normal; font-size: 16px;">Discover which of the Five Forces drives your climate action.</p>
+    <button data-template-id="start-button" class="canva-button px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all" onclick="startQuiz()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">TAKE THE QUIZ</button>
+  </div><!-- ARC SCREEN -->
+  <div id="arc-screen" class="fade-in text-center max-w-lg mx-auto hidden">
+   <div class="mb-8">
+    <span id="arc-badge" class="act-badge inline-block px-4 py-1 rounded-full text-sm font-bold text-white mb-4 shadow-lg"></span>
+    <h2 id="arc-title" class="arc-title text-3xl font-bold mb-3 glow text-white"></h2>
+    <p id="arc-desc" class="text-lg opacity-80 text-white"></p>
+   </div><button class="px-6 py-3 rounded-full font-semibold bg-white/10 border border-emerald-400/40 hover:bg-emerald-500/20 hover:border-emerald-400 transition-all text-white" onclick="continueFromArc()">🌍 Begin</button>
+  </div><!-- QUESTION SCREEN -->
+  <div id="question-screen" class="fade-in max-w-xl mx-auto w-full hidden">
+   <div class="mb-6">
+    <div class="flex justify-between items-center mb-2">
+     <span id="q-number" class="text-sm font-medium opacity-60 text-white"></span> <span id="q-progress-text" class="text-sm font-medium opacity-60 text-white"></span>
+    </div>
+    <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+     <div id="progress-bar" class="h-full rounded-full transition-all duration-500" style="width:0%"></div>
+    </div>
+   </div>
+   <h2 id="q-text" class="text-xl font-bold mb-6 text-white"></h2>
+   <div id="choices" class="space-y-3"></div>
+  </div><!-- RESULTS SCREEN -->
+  <div id="results-screen" class="fade-in text-center max-w-lg mx-auto hidden">
+   <div class="rounded-2xl overflow-hidden mb-6 shadow-2xl border border-white/10">
+    <img data-template-id="result-image-canopy" class="canva-image w-full h-auto object-cover hidden" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Canopy.png" alt="Canopy.png"> 
+    <img data-template-id="result-image-ember" class="canva-image w-full h-auto object-cover hidden" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Ember.png" alt="Ember.png"> 
+    <img data-template-id="result-image-tide" class="canva-image w-full h-auto object-cover hidden" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Tide.png" alt="Tide.png"> 
+    <img data-template-id="result-image-echo" class="canva-image w-full h-auto object-cover hidden" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Echo.png" alt="Echo.png"> 
+    <img data-template-id="result-image-summit" class="canva-image w-full h-auto object-cover hidden" loading="lazy" src="https://raw.githubusercontent.com/wwfph/climateforcequiz/main/Summit.png" alt="Summit.png">
+   </div>
+   <p id="result-label" class="text-sm font-bold uppercase tracking-widest opacity-60 mb-2 text-white"></p>
+   <h1 id="result-title" class="text-5xl font-bold mb-2 glow text-white" style="font-family:'Fraunces',serif"></h1>
+   <p id="result-motto" class="text-base italic opacity-70 mb-4 text-white"></p>
+   <p id="result-desc" class="text-lg opacity-80 mb-4 leading-relaxed text-white"></p>
+   <div id="result-strengths" class="flex flex-wrap gap-2 justify-center mb-4"></div>
+   <p id="result-examples" class="text-sm opacity-60 mb-6 text-white"></p>
+   <div class="flex gap-3 justify-center mb-6">
+    <button onclick="downloadResult()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white">📥 Download</button> <button onclick="shareQuiz()" class="flex-1 px-4 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white">🎯 Share</button>
+   </div><button id="explore-force-btn" class="w-full px-8 py-3 rounded-full font-semibold bg-emerald-500/20 border border-emerald-400/60 hover:bg-emerald-500/30 transition-all text-sm text-white mb-3" onclick="exploreForce()"></button> <button data-template-id="restart-button" class="canva-button px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-white" onclick="restart()" style="background: rgb(16, 185, 129); color: rgb(255, 255, 255); font-weight: 700; font-style: normal; font-size: 16px;">🔄 Play Again</button>
+  </div>
+  <script>
+    const types = ['Canopy','Ember','Tide','Echo','Summit'];
+    const scores = {Canopy:0,Ember:0,Tide:0,Echo:0,Summit:0};
+
+    const arcs = [
+      {badge:'ACT 1', title:'⚡ Warning Signs', desc:'The climate shifts. How do you respond to the first signals?'},
+      {badge:'ACT 2', title:'🌊 Intensifying Storms', desc:'Disasters escalate. What role do you play in the chaos?'},
+      {badge:'ACT 3', title:'🔥 Struggle & Adaptation', desc:'Communities rebuild. How do you contribute to recovery?'},
+      {badge:'ACT 4', title:'🌱 New Future', desc:'A resilient world emerges. What is your legacy?'}
+    ];
+
+    const questions = [
+      {q:"Unusually hot summers now last longer in your city. What is your first concern?",a:[{text:"Heat stress on vulnerable wildlife and ecosystems.",type:"Canopy"},{text:"Designing new cooling technologies.",type:"Ember"},{text:"Mobilizing community cooling centers together.",type:"Tide"},{text:"Raising public awareness through storytelling.",type:"Echo"},{text:"Studying the temperature data trends.",type:"Summit"}]},
+      {q:"Rain patterns suddenly become unpredictable. You notice:",a:[{text:"Habitat disruption for local species.",type:"Canopy"},{text:"Opportunity for innovative water systems.",type:"Ember"},{text:"Communities need to organize together.",type:"Tide"},{text:"People need to hear about this urgently.",type:"Echo"},{text:"Shifting rainfall data worth investigating.",type:"Summit"}]},
+      {q:"Sea levels are slowly rising. Your biggest concern is:",a:[{text:"Coastal ecosystems and mangroves at risk.",type:"Canopy"},{text:"Floating city concepts and green engineering.",type:"Ember"},{text:"Fishing communities losing their way of life together.",type:"Tide"},{text:"Amplifying the voices of affected coastal communities.",type:"Echo"},{text:"Measurement accuracy and long-term projections.",type:"Summit"}]},
+      {q:"A mild typhoon causes unexpected flooding. You think:",a:[{text:"Protecting natural flood barriers like wetlands.",type:"Canopy"},{text:"Better infrastructure design opportunities.",type:"Ember"},{text:"Stronger collective disaster response.",type:"Tide"},{text:"Sharing affected families' stories widely.",type:"Echo"},{text:"Analyzing storm pattern data.",type:"Summit"}]},
+      {q:"Urban heat becomes a daily struggle. You respond by:",a:[{text:"Planting urban forests and green corridors.",type:"Canopy"},{text:"Smart cooling innovations and green roofs.",type:"Ember"},{text:"Organizing neighborhood cooling cooperatives.",type:"Tide"},{text:"Creating campaigns about heat inequality.",type:"Echo"},{text:"Heat mapping and citizen science projects.",type:"Summit"}]},
+      {q:"A super typhoon is approaching your region. Your instinct is:",a:[{text:"Ensure wildlife rescue plans are activated.",type:"Canopy"},{text:"Deploy innovative early warning systems.",type:"Ember"},{text:"Rally the community for collective preparation.",type:"Tide"},{text:"Broadcast urgent warnings far and wide.",type:"Echo"},{text:"Track storm data and share findings.",type:"Summit"}]},
+      {q:"Flooding becomes more frequent in cities. You notice:",a:[{text:"Loss of natural drainage systems.",type:"Canopy"},{text:"Urban redesign opportunities with green solutions.",type:"Ember"},{text:"More displaced families needing collective support.",type:"Tide"},{text:"Stories that need to be told to drive change.",type:"Echo"},{text:"Rainfall pattern shifts worth documenting.",type:"Summit"}]},
+      {q:"A blackout happens during extreme weather. You:",a:[{text:"Check that conservation systems are safe.",type:"Canopy"},{text:"Think of renewable energy solutions.",type:"Ember"},{text:"Coordinate neighborhood mutual aid.",type:"Tide"},{text:"Document the experience to raise awareness.",type:"Echo"},{text:"Analyze grid failure patterns.",type:"Summit"}]},
+      {q:"Evacuation centers are overcrowded. You focus on:",a:[{text:"Creating safe green spaces for relief.",type:"Canopy"},{text:"Better shelter design innovations.",type:"Ember"},{text:"Building solidarity among evacuees.",type:"Tide"},{text:"Amplifying evacuees' voices to leaders.",type:"Echo"},{text:"Capacity data and logistics research.",type:"Summit"}]},
+      {q:"Misinformation spreads during disasters. You:",a:[{text:"Focus on protecting what's real and grounded.",type:"Canopy"},{text:"Improve communication tool design.",type:"Ember"},{text:"Organize trusted community networks.",type:"Tide"},{text:"Counter misinformation with powerful storytelling.",type:"Echo"},{text:"Verify facts and trace sources.",type:"Summit"}]},
+      {q:"Communities begin rebuilding after disasters. You contribute:",a:[{text:"Restoring damaged habitats and green spaces.",type:"Canopy"},{text:"Designing resilient, sustainable buildings.",type:"Ember"},{text:"Organizing collective rebuilding efforts.",type:"Tide"},{text:"Sharing recovery stories to inspire others.",type:"Echo"},{text:"Assessing what worked and what didn't.",type:"Summit"}]},
+      {q:"Food supply becomes unstable. You focus on:",a:[{text:"Protecting biodiversity and seed banks.",type:"Canopy"},{text:"Urban farming and food tech solutions.",type:"Ember"},{text:"Community food sharing networks.",type:"Tide"},{text:"Campaigning for food justice.",type:"Echo"},{text:"Supply chain analysis and research.",type:"Summit"}]},
+      {q:"Climate migration increases. You prioritize:",a:[{text:"Preserving the lands people are leaving.",type:"Canopy"},{text:"New sustainable city development plans.",type:"Ember"},{text:"Welcoming communities and integration.",type:"Tide"},{text:"Telling migrants' stories to build empathy.",type:"Echo"},{text:"Migration pattern research.",type:"Summit"}]},
+      {q:"Schools are disrupted by climate events. You:",a:[{text:"Create nature-based learning environments.",type:"Canopy"},{text:"Develop innovative remote learning tools.",type:"Ember"},{text:"Organize peer support learning circles.",type:"Tide"},{text:"Campaign for climate education funding.",type:"Echo"},{text:"Research disruption impacts on learning.",type:"Summit"}]},
+      {q:"Mental health impacts rise after disasters. You:",a:[{text:"Create healing gardens and nature therapy.",type:"Canopy"},{text:"Innovate mental health technology tools.",type:"Ember"},{text:"Build peer support community groups.",type:"Tide"},{text:"Destigmatize through public storytelling.",type:"Echo"},{text:"Study the data on climate anxiety.",type:"Summit"}]},
+      {q:"The country invests heavily in climate solutions. You:",a:[{text:"Push for protected areas and conservation.",type:"Canopy"},{text:"Design breakthrough innovations.",type:"Ember"},{text:"Ensure community voices shape the plan.",type:"Tide"},{text:"Amplify success stories to maintain momentum.",type:"Echo"},{text:"Evaluate effectiveness with research.",type:"Summit"}]},
+      {q:"Renewable energy becomes widespread. You:",a:[{text:"Ensure it doesn't harm ecosystems.",type:"Canopy"},{text:"Invent next-generation systems.",type:"Ember"},{text:"Help communities adopt it together.",type:"Tide"},{text:"Celebrate the transition publicly.",type:"Echo"},{text:"Monitor energy data and outcomes.",type:"Summit"}]},
+      {q:"Cities are redesigned for floods and heat. You:",a:[{text:"Integrate nature into every design.",type:"Canopy"},{text:"Reimagine urban infrastructure creatively.",type:"Ember"},{text:"Ensure inclusive community participation.",type:"Tide"},{text:"Tell the story of transformation.",type:"Echo"},{text:"Evaluate design models with data.",type:"Summit"}]},
+      {q:"Climate education becomes mandatory. You:",a:[{text:"Champion outdoor and nature-based learning.",type:"Canopy"},{text:"Create innovative learning tools.",type:"Ember"},{text:"Build student-led action networks.",type:"Tide"},{text:"Make the message compelling and viral.",type:"Echo"},{text:"Improve curriculum through research.",type:"Summit"}]},
+      {q:"You look at the future. You feel:",a:[{text:"Grounded — ready to protect what matters.",type:"Canopy"},{text:"Inspired — full of ideas to build.",type:"Ember"},{text:"Connected — stronger together.",type:"Tide"},{text:"Empowered — ready to speak up.",type:"Echo"},{text:"Curious — so much still to discover.",type:"Summit"}]}
+    ];
+
+    const results = {
+      Canopy:{
+        name:'🌲 Canopy',
+        desc:'You are the one who creates safety and stability. You care deeply about protecting wildlife, communities, and the places that matter. What thrives under your care can flourish for generations.',
+        motto:'Protect what makes life possible.',
+        strengths:['Empathy','Responsibility','Reliability','Patience','Stewardship'],
+        examples:'Jane Goodall • Wangari Maathai'
+      },
+      Ember:{
+        name:'🔥 Ember',
+        desc:'You are the source of fresh ideas. You love imagining new ways to solve problems and turning possibilities into action. Small sparks can ignite extraordinary change.',
+        motto:'Every movement begins with a spark.',
+        strengths:['Creativity','Innovation','Resourcefulness','Problem-solving','Vision'],
+        examples:'Boyan Slat • Yvon Chouinard'
+      },
+      Tide:{
+        name:'🌊 Tide',
+        desc:'You are the force that brings people together. You build relationships, create momentum, and strengthen collective action. Real change happens when people move together.',
+        motto:'Together, we create momentum.',
+        strengths:['Collaboration','Leadership','Inclusivity','Relationship-building','Teamwork'],
+        examples:'Melati Wijsen • Autumn Peltier'
+      },
+      Echo:{
+        name:'🪶 Echo',
+        desc:'You are the storyteller and amplifier. You inspire action by sharing ideas, raising awareness, and helping important messages reach others. One voice can travel farther than we imagine.',
+        motto:'Make your voice matter.',
+        strengths:['Communication','Courage','Storytelling','Influence','Advocacy'],
+        examples:'Greta Thunberg • Vanessa Nakate'
+      },
+      Summit:{
+        name:'⛰️ Summit',
+        desc:'You are the seeker of new perspectives. You ask questions, explore ideas, and inspire others to see the world differently. Understanding the world is the first step to changing it.',
+        motto:'Every horizon reveals a new possibility.',
+        strengths:['Curiosity','Critical thinking','Observation','Adaptability','Open-mindedness'],
+        examples:'David Attenborough • Sylvia Earle'
+      }
+    };
+
+    let currentQ = 0;
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+function show(id) {
+  const screens = ['start-screen','arc-screen','question-screen','results-screen'];
+
+  screens.forEach(s => {
+    const el = document.getElementById(s);
+    el.style.display = 'none';
+    el.classList.remove('fade-in');
+  });
+
+  const target = document.getElementById(id);
+  target.style.display = 'block';
+
+  void target.offsetWidth;
+  target.classList.add('fade-in');
+}
+
+    function startQuiz() {
+      currentQ = 0;
+      types.forEach(t => scores[t] = 0);
+      showArc(0);
+    }
+
+    function showArc(idx) {
+        if (idx >= arcs.length) {
+    showResults();
+    return;
+  }
+      
+      const arc = arcs[idx];
+      document.getElementById('arc-badge').textContent = arc.badge;
+      document.getElementById('arc-title').textContent = arc.title;
+      document.getElementById('arc-desc').textContent = arc.desc;
+      show('arc-screen');
+    }
+
+    function continueFromArc() { showQuestion(); }
+
+    function showQuestion() {
+      const q = questions[currentQ];
+      document.getElementById('q-number').textContent = `Question ${currentQ+1}`;
+      document.getElementById('q-progress-text').textContent = `${currentQ+1} / 20`;
+      document.getElementById('progress-bar').style.width = ((currentQ+1)/20*100)+'%';
+      document.getElementById('q-text').textContent = q.q;
+      const container = document.getElementById('choices');
+      container.innerHTML = '';
+      shuffle(q.a).forEach(choice => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn w-full text-left p-4 rounded-xl bg-white/5 border border-white/15 backdrop-blur hover:bg-emerald-500/10 font-medium text-white';
+        btn.textContent = choice.text;
+        btn.onclick = () => answer(choice.type);
+        container.appendChild(btn);
+      });
+      show('question-screen');
+    }
+
+  function answer(type) {
+  scores[type]++;
+  currentQ++;
+
+  // ✅ ALWAYS finish first if last question reached
+  if (currentQ >= questions.length) {
+    showResults();
+    return;
+  }
+
+// arcs only for 5,10,15 (NOT 20)
+  if (currentQ % 5 === 0 && currentQ < questions.length) {
+    showArc(currentQ / 5);
+    return;
+  }
+
+  showQuestion();
+}
+
+    function showResults() {
+      const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+      const r = results[winner];
+      document.getElementById('result-label').textContent = 'Your Climate Force';
+      document.getElementById('result-title').textContent = r.name;
+      document.getElementById('result-motto').textContent = `"${r.motto}"`;
+      document.getElementById('result-desc').textContent = r.desc;
+      
+      const strengthsEl = document.getElementById('result-strengths');
+      strengthsEl.innerHTML = '';
+      r.strengths.forEach(s => {
+        const tag = document.createElement('span');
+        tag.className = 'strength-tag px-3 py-1 rounded-full text-xs font-medium text-emerald-300';
+        tag.textContent = s;
+        strengthsEl.appendChild(tag);
+      });
+      
+      document.getElementById('result-examples').textContent = `Inspired by: ${r.examples}`;
+      document.getElementById('explore-force-btn').textContent = `🌍 Explore the ${r.name.split(' ')[1]} Force`;
+
+// Hide all images first
+document.querySelectorAll('[data-template-id^="result-image-"]').forEach(img => {
+  img.classList.add('hidden');
+});
+
+// Normalize winner just in case
+const key = winner.trim().toLowerCase();
+
+// Show only matching image
+const imgMap = {
+  canopy: 'result-image-canopy',
+  ember: 'result-image-ember',
+  tide: 'result-image-tide',
+  echo: 'result-image-echo',
+  summit: 'result-image-summit'
+};
+
+const imgId = imgMap[key];
+if (imgId) {
+  const el = document.querySelector(`[data-template-id="${imgId}"]`);
+  if (el) el.classList.remove('hidden');
+}
+
+console.log("about to show results screen");
+show('results-screen');
+console.log("results screen should be visible");
+      }
+
+    function restart() { show('start-screen'); }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-emerald-500 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg z-50';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+
+   async function downloadResult() {
+  const resultScreen = document.getElementById('results-screen');
+
+  const canvas = await html2canvas(resultScreen, {
+    backgroundColor: '#020818',
+    scale: 2, // higher quality
+    useCORS: true
+  });
+
+  const link = document.createElement('a');
+  link.download = 'climate-force-result.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+
+  showToast('✓ Result downloaded');
+}
+    
+    function wrapText(ctx, text, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      const lines = [];
+      let currentLine = '';
+      
+      words.forEach(word => {
+        const testLine = currentLine + (currentLine ? ' ' : '') + word;
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      });
+      if (currentLine) lines.push(currentLine);
+      return lines;
+    }
+
+    function shareQuiz() {
+      const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+      const r = results[winner];
+      const text = `I'm ${r.name} in the Five Forces Climate Quiz! Discover your climate force.`;
+      
+      // Try native Web Share API first
+      if (navigator.share) {
+        navigator.share({
+          title: 'Five Forces Climate Quiz',
+          text: text
+        }).catch(err => {
+          if (err.name !== 'AbortError') console.error(err);
+        });
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(text).then(() => showToast('✓ Copied to clipboard')).catch(() => showToast('Unable to copy'));
+      }
+    }
+
+    function exploreForce() {
+      const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+      const forceSlug = winner.toLowerCase();
+      window.open(`https://wwf-philippines.my.canva.site/forces-of-climate-action/${forceSlug}`, '_blank');
+    }
+
+    lucide.createIcons();
+  </script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body></html>
+
 </body></html>
