@@ -181,6 +181,11 @@
     }
 
     function showArc(idx) {
+        if (idx >= arcs.length) {
+    showResults();
+    return;
+  }
+      
       const arc = arcs[idx];
       document.getElementById('arc-badge').textContent = arc.badge;
       document.getElementById('arc-title').textContent = arc.title;
