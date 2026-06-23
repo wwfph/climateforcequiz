@@ -208,13 +208,24 @@
       show('question-screen');
     }
 
-    function answer(type) {
-      scores[type]++;
-      currentQ++;
-      if (currentQ >= 20) { showResults(); return; }
-      if (currentQ % 5 === 0) { showArc(currentQ/5); return; }
-      showQuestion();
-    }
+  function answer(type) {
+  scores[type]++;
+  currentQ++;
+
+  // ✅ ALWAYS finish first if last question reached
+  if (currentQ >= questions.length) {
+    showResults();
+    return;
+  }
+
+  // ✅ ONLY show arc if NOT at end
+  if (currentQ % 5 === 0) {
+    showArc(currentQ / 5);
+    return;
+  }
+
+  showQuestion();
+}
 
     function showResults() {
       const winner = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
