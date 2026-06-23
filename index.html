@@ -218,8 +218,8 @@
     return;
   }
 
-  // ✅ ONLY show arc if NOT at end
-  if (currentQ % 5 === 0) {
+// arcs only for 5,10,15 (NOT 20)
+  if (currentQ % 5 === 0 && currentQ < questions.length) {
     showArc(currentQ / 5);
     return;
   }
